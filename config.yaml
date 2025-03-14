@@ -1,0 +1,6 @@
+model:
+  hf_token: "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"
+  base_model: "Qwen/Qwen2.5-7B-Instruct"             
+  gpu_memory_utilization: 0.85
+  port: 7986
+  ner_model: "cointegrated/LaBSE-en-ru"            

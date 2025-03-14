@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "ai-security-course"
+packages = [{include = "agent"}]
+version = "0.1.0"
+description = ""
+authors = ["vilovnok <vilovnok@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+hydra-core = "^1.3.2"
+vllm = "0.6.4.post1"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
