@@ -2,7 +2,7 @@ model:
   hf_token: "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"
   qwen: "Qwen/Qwen2.5-7B-Instruct"    
   deepseek: "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"         
-  gpu_memory_utilization: 0.85,
+  gpu_memory_utilization: 0.85
   temperature: 0.1
   port: 7986
 
