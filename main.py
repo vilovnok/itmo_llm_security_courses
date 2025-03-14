@@ -15,8 +15,8 @@ import llamator
 def main(cfg: DictConfig):
         
 ##################### Setup LLamator ############################
-    url = cfg.api.url
-    model = cfg.model.giga
+    url = f"http://localhost:{cfg.model.portV1}/v1"
+    model = cfg.model.qwen
     temperature = cfg.model.temperature
 
     attack_model = llamator.ClientOpenAI(
