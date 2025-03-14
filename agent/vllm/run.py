@@ -14,7 +14,7 @@ def main(cfg: DictConfig):
     command = [
         "python", "-m", "vllm.entrypoints.openai.api_server",
         "--model", cfg.model.deepseek,
-        "--gpu-memory-utilization", str(cfg.model.gpu_memory_utilization),
+        "--gpu-memory-utilization", "0.25",
         "--port", str(cfg.model.portV2)
     ]
     subprocess.run(command)
