@@ -1,7 +1,7 @@
 model:
   hf_token: "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"
   qwen: "Qwen/Qwen2.5-7B-Instruct"    
-  gemma: "google/gemma-3-1b-pt"         
+  gemma: "meta-llama/Llama-3.2-3B-Instruct"         
   gpu_memory_utilization: 0.85
   temperature: 0.1
   portV1: 7986
