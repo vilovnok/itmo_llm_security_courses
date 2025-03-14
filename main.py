@@ -16,7 +16,7 @@ def main(cfg: DictConfig):
         
 ##################### Setup LLamator ############################
     url = cfg.api.url
-    model = cfg.model.deepseek
+    model = cfg.model.giga
     temperature = cfg.model.temperature
 
     attack_model = llamator.ClientOpenAI(
