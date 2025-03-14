@@ -4,8 +4,9 @@ model:
   deepseek: "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"         
   gpu_memory_utilization: 0.85
   temperature: 0.1
-  port: 7986
+  portV1: 7986
+  portV2: 7987
 
 api:
-  url: "http://localhost:7986/v1"
+  url: "http://localhost:7986/v1"  
   openai_key: "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"
