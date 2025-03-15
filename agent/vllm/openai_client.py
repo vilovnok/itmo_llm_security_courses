@@ -1,28 +1,17 @@
 import openai
-from agent.utils import LlmModelType, PromptSanitizer
-from agent.vllm_server.utils import openai_key, api_base
 
-
-
+from agent.utils import PromptSanitizer
 
 class OpenAIClient(PromptSanitizer):
-    def __init__(self, 
-                model_type: LlmModelType=LlmModelType,
-                api_key: str=openai_key,
-                api_base: str=api_base):
-        
-        self.__setup_model(model_type)        
-        self.__setup_openai(api_key=api_key, api_base=api_base) 
+    def __init__(self, model: str, openai_key: str, port: str):    
+
+        self.model = model        
+        self.__setup_openai(api_key=openai_key, port=port) 
     
-    def __setup_openai(self, api_key:str, api_base:str):
+    def __setup_openai(self, api_key:str, port:str):
         openai.api_key = api_key
-        openai.api_base = api_base
+        openai.api_base = f"http://localhost:{port}/v1"
 
-    def __setup_model(self, model_type:LlmModelType):
-        if model_type == LlmModelType.QWEN:
-            model = LlmModelType.QWEN.value
-
-        self.model = model
 
     def ChatCompletion(self, prompt:str, content:str):
         formatted_user_input = self.get_completion_from_messages(input_text=content, delimiter='#'*3)    

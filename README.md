@@ -3,13 +3,17 @@
 В рамках данного круса рассмотрим несколько практических задач.
 ---
 
-## 🛠 Основной инструменты:
-- LLamator
-- Garak
-
+## 🛠 Основной инструменты для The Red Teaming
 ### Llamator
-QWEN
-![](images/llamator.png)
+### <code>Qwen</code> Vs <code>Cotype-Nano</code>
+<div style="display: flex;">
+  <img src="images/llamator_qwen.png" alt="Image 1" style="margin-right: 10px;">
+  <img src="images/llamator_cotype.jpg" alt="Image 2">
+</div>
 
 ### Garak
-![](images/llamator.png)
+### <code>Qwen</code> Vs <code>Cotype-Nano</code>
+<div style="display: flex;">
+  <img src="images/llamator.png" alt="Image 1" style="margin-right: 10px;">
+  <img src="images/llamator.png" alt="Image 2">
+</div>

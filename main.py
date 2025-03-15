@@ -6,35 +6,17 @@ import argparse
 
 import subprocess
 
-import llamator
 
+from garak.generators.rest import RestGenerator
 
+from agent.vllm.openai_client import OpenAIClient
 
+from agent.llamator.adaptor import Llamator
+# from agent.garak.adaptor import Garak
 
 @hydra.main(version_base=None, config_path=".", config_name="config")
-def main(cfg: DictConfig):
-        
-##################### Setup LLamator ############################
-    url = f"http://localhost:{cfg.model.portV1}/v1"
-    model = cfg.model.qwen
-    temperature = cfg.model.temperature
-
-    attack_model = llamator.ClientOpenAI(
-        api_key="lm-studio",
-        base_url=url,
-        model=model,
-        temperature=temperature,
-        system_prompts=["You are an attacking model."],
-    )
-
-    tested_model = llamator.ClientOpenAI(
-        api_key="lm-studio",
-        base_url=url,
-        model=model,
-        temperature=temperature,
-        model_description="Model description",
-    )
-
+def adapterLlamator(cfg: DictConfig):
+    
     tests_with_attempts = [
         ("aim_jailbreak", 2),
         ("base64_injection", 2),
@@ -57,24 +39,66 @@ def main(cfg: DictConfig):
         # ("ucar", 2),
         # ("RU_ucar", 2)
     ]
-
     config = {
         "enable_logging": True, "enable_reports": True, 
         "artifacts_path": "./artifacts", "debug_level": 1, 
         "report_language": "ru"
     }
 
-    llamator.start_testing(
-            attack_model=attack_model,
-            tested_model=tested_model,
-            config=config,
-            tests_with_attempts=tests_with_attempts,
-            multistage_depth=20,
-    )
+    client = Llamator(config=config,
+                      tests_with_attempts=tests_with_attempts, **cfg)    
+    client.run()
+
+
+
+
 
 ##################### Setup Garak ############################
+@hydra.main(version_base=None, config_path=".", config_name="config")
+def garak_run(cfg: DictConfig):
+        clinet = OpenAIClient(cfg.model.cotype, cfg.api.openai_key, cfg.model.portV2)                
+        text = clinet.invoke(prompt='Отвечай высокомерно.', content='ЧТо самое главное в человеке?')
+
+
+
+        def run_garak(config_file="config.yml"):
+            try:
+                result = subprocess.run(["garak", "--config", config_file],
+                                        capture_output=True, text=True)
+                
+                print("[INFO] Garak Output:")
+                print(result.stdout)
+                print("[ERROR] Garak Errors:")
+                print(result.stderr)
+
+            except Exception as e:
+                print(f"[ERROR] Failed to run Garak: {e}")
+
+
+
+        # generator = RestGenerator(
+        #     uri=f"http://localhost:{cfg.model.portV1}/v1"
+        # )
+        
+        # generator.config = {
+        #     "request_json": {
+        #         "text": "$INPUT"
+        #     },
+        #     "method": "POST",
+        #     "response_field": "text"
+        # }
+
+        # response = generator.generate("Привет, как дела?")
+        # print(response)
+
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-    main()
+    
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument("--type", type=str, required=True)    
+    
+    # llamator_run()
+    # garak_run()
+    adapterLlamator()

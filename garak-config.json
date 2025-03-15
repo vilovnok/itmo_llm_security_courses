@@ -1,0 +1,15 @@
+{
+    "rest.RestGenerator": {
+        "name": "Qwen test",
+        "uri": "http://localhost:7986/endpoint",
+        "method": "post",
+        "headers":{
+            "X-Authorization": "$KEY"
+        },
+        "req_template_json_object":{
+            "text":"$INPUT"
+        },
+        "response_json": true,
+        "response_json_field": "text"
+    }
+}
