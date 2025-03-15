@@ -1,7 +1,5 @@
 import re
 
-
-
 class PromptSanitizer:
     def __init__(self):
         pass

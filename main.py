@@ -2,18 +2,14 @@ import hydra
 from omegaconf import DictConfig
 
 import logging
-import argparse
 
-import subprocess
-
-
-from garak.generators.rest import RestGenerator
-
+from agent.garak.adaptor import Garak
+from agent.llamator.adaptor import Llamator
 from agent.vllm.openai_client import OpenAIClient
 
-from agent.llamator.adaptor import Llamator
-# from agent.garak.adaptor import Garak
 
+
+##################### Setup Llamator ############################
 @hydra.main(version_base=None, config_path=".", config_name="config")
 def adapterLlamator(cfg: DictConfig):
     
@@ -50,55 +46,14 @@ def adapterLlamator(cfg: DictConfig):
     client.run()
 
 
-
-
-
 ##################### Setup Garak ############################
 @hydra.main(version_base=None, config_path=".", config_name="config")
-def garak_run(cfg: DictConfig):
-        clinet = OpenAIClient(cfg.model.cotype, cfg.api.openai_key, cfg.model.portV2)                
-        text = clinet.invoke(prompt='Отвечай высокомерно.', content='ЧТо самое главное в человеке?')
-
-
-
-        def run_garak(config_file="config.yml"):
-            try:
-                result = subprocess.run(["garak", "--config", config_file],
-                                        capture_output=True, text=True)
-                
-                print("[INFO] Garak Output:")
-                print(result.stdout)
-                print("[ERROR] Garak Errors:")
-                print(result.stderr)
-
-            except Exception as e:
-                print(f"[ERROR] Failed to run Garak: {e}")
-
-
-
-        # generator = RestGenerator(
-        #     uri=f"http://localhost:{cfg.model.portV1}/v1"
-        # )
-        
-        # generator.config = {
-        #     "request_json": {
-        #         "text": "$INPUT"
-        #     },
-        #     "method": "POST",
-        #     "response_field": "text"
-        # }
-
-        # response = generator.generate("Привет, как дела?")
-        # print(response)
-
+def adapterGarak(cfg: DictConfig):
+    client = Garak(**cfg)    
+    client.run()
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-    
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("--type", type=str, required=True)    
-    
-    # llamator_run()
-    # garak_run()
     adapterLlamator()
+    adapterGarak()
