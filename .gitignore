@@ -1,3 +1,6 @@
 outputs
 .venv
 artifacts
+rag
+dataset.csv
+dataset

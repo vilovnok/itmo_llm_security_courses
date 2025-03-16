@@ -18,8 +18,8 @@ class Llamator:
         portV1 = cfg.get('model', {}).get('portV1', None)
         portV2 = cfg.get('model', {}).get('portV2', None)
 
-        attack_url = f"http://localhost:{portV2}/v1" if portV1 else None
-        tested_url = f"http://localhost:{portV1}/v1" if portV1 else None
+        attack_url = f"http://localhost:{portV1}/v1" if portV1 else None
+        tested_url = f"http://localhost:{portV2}/v1" if portV1 else None
  
  
         attack_model=tested_model

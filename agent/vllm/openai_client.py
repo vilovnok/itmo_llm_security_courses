@@ -12,6 +12,8 @@ class OpenAIClient(PromptSanitizer):
         openai.api_key = api_key
         openai.api_base = f"http://localhost:{port}/v1"
 
+        self.client = openai
+
 
     def ChatCompletion(self, prompt:str, content:str):
         formatted_user_input = self.get_completion_from_messages(input_text=content, delimiter='#'*3)    
@@ -21,16 +23,16 @@ class OpenAIClient(PromptSanitizer):
                 {"role": "user", "content": formatted_user_input}
             ]
 
-            response = openai.ChatCompletion.create(
+            response = self.client.ChatCompletion.create(
                 model=self.model,
                 temperature=0.2,
                 frequency_penalty=0.2,
                 max_tokens=1024,
                 top_p=0.8,
                 messages=messages
-            )
-            
-            return self.validate_response(response["choices"][0]["message"]["content"])
+            )            
+            answer = response["choices"][0]["message"]["content"]
+            return answer
 
         except openai.error.InvalidRequestError as e:
             print(f"Invalid request: {e}")
