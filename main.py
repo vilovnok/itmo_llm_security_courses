@@ -2,7 +2,7 @@ import hydra
 from omegaconf import DictConfig
 
 # from agent.garak.adaptor import Garak
-from agent.llamator.adaptor import Llamator
+# from agent.llamator.adaptor import Llamator
 from agent.vllm.openai_client import OpenAIClient
 from agent.database.retriever import Retriever
 
@@ -110,6 +110,4 @@ if __name__ == "__main__":
     
     # adapterLlamator()
     # adapterGarak()
-    # adaptorCustom()
-
-    RAG()
+    adaptorCustom()
