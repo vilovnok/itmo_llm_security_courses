@@ -18,15 +18,17 @@
   <img src="images/garak_cotype.png" alt="Image 2">
 </div>
 
-| **Категория**          | **Llamator**                                                                 | **Garak**                                                                 |
-|------------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| **Установка**          | - `pip`<br>- `conda`                                                        | - `pip`<br>- `conda`<br>- `brew`                                          |
-| **Клиенты**            | - Swagger OpenAI<br>- Custom API<br>- LangChain                              | - Swagger OpenAI<br>- Hugging Face<br>- Custom API<br>- Cohere<br>- Replicate |
-| **Виды атак**          | **Специализированные атаки:**<br>- AIM Jailbreak (Макиавелли)<br>- Base64 Injection<br>- Complimentary Transition<br>- DAN Jailbreak<br>- Amnesia<br>- Authoritative Role Impersonation<br>- Contextual Redirection<br>- Affirmative Suffix<br>- System Prompt Leakage<br>- Ethical Compliance (региональные нормы РФ)<br>- Harmful Behavior<br>- Self Refine<br>- Typoglycemia Attack<br>- UCAR<br>- Linguistic Evasion (территориальная целостность РФ)<br>- Sycophancy | **Probes-атаки:**<br>- ANSI-экранирование (`ansiescape`)<br>- Генерация вредоносного контента (`atkgen.Tox`)<br>- Антивирусное сканирование (`av_spam_scanning`)<br>- Продолжение контекста (`continuation`)<br>- Многоуровневые DAN-атаки (`dan.*`)<br>- Кодировки (`encoding.*`)<br>- Глюк-атаки (`glitch`)<br>- Латентные инъекции (`latentinjection`)<br>- Утечки данных (`leakreplay`)<br>- Модерация контента (`lmrc`)<br>- Генерация вредоносного ПО (`malwaregen`)<br>- Халлюцинации пакетов (`packagehallucination`)<br>- XSS-атаки (`xss`) |
-| **Многоступенчатые атаки** | - OWASP LLM01:2025 (Continuous Prompt Injection)<br>- OWASP LLM07:2025 (System Prompt Leakage)<br>- OWASP LLM09:2025 (Misinformation) | Не поддерживаются |
-| **Детекторы**          | ML-классификаторы + контекстный анализ                                      | Поиск ключевых слов                                                       |
-| **Туториалы**          | - Атаки на RAG/Agent<br>- Docker-развёртывание                              | Отсутствуют                                                               |
-| **Полезные файлы**     | - История атак<br>- DOCX-отчёты                                             | **Журналы:**<br>- Screen Output (реальный мониторинг)<br>- Report Log (запросы/ответы)<br>- Hit Log (успешные атаки)<br>- Debug Log |
-| **Руководство**        | - Видео<br>- Текстовое                                                      | - Видео<br>- Текстовое                                                    |
-| **Особенности**        | - Региональная адаптация (этика РФ)<br>- Поддержка Docker<br>- Многоуровневые OWASP-атаки | - Узконаправленное тестирование LLM<br>- 150+ специализированных probes<br>- CLI-интерфейс |
-| **Целевое применение** | Тестирование моделей с учётом локальных норм и многоуровневой безопасности | Стресс-тестирование базовых уязвимостей LLM                               |
+
+# Сравнительная таблица Llamator vs Garak
+
+| **Категория**         | **Llamator**                                                                 | **Garak**                                                                 |
+|-----------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| **Установка**         | `pip`, `conda`                                                              | `pip`, `conda`, `brew`                                                    |
+| **Клиенты**           | Swagger OpenAI, Custom API, LangChain                                       | Swagger OpenAI, Hugging Face, Custom API, Cohere, Replicate               |
+| **Целевая аудитория** | Тестирование LLM с учётом региональной специфики (напр., РФ)                | Генеративные модели (без региональной специфики)                          |
+| **Интерфейс**         | Docker, python-function                                                     | Командная строка                                                          |
+| **Виды атак**         | - Jailbreak (AIM, DAN, Amnesia) <br> - Инъекции (Base64, Contextual) <br> - Уязвимости системы (Prompt Leakage, Ethical Compliance) <br> - Лингвистические атаки (Typoglycemia, Linguistic Evasion) <br> - Атаки на RAG-системы | - Многочисленные `probes` (DAN, кодировки, генерация вредоносного кода) <br> - Тесты на токсичность <br> - Уязвимости форматов файлов <br> - Атаки на детекторы (XSS, эксфильтрация данных) <br> - **Нет поддержки RAG** |
+| **Детекторы**         | Не указано                                                                  | Анализ ответов через поиск ключевых слов                                   |
+| **Отчёты**            | - Excel/CSV (история запросов) <br> - DOCX (отчёт об испытаниях)            | - Экранный вывод <br> - Журналы (отчёты, события, отладка)                |
+| **Руководство**       | Видео + текстовое                                                           | Текстовое                                                                 |
+| **Особенности**       | - Акцент на этические ограничения и региональные требования <br> - Docker   | - Широкий спектр предустановленных `probes` <br> - Гибкая настройка тестов |
