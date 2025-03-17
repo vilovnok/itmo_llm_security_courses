@@ -1,10 +1,10 @@
 import hydra
 from omegaconf import DictConfig
 
-from agent.garak.adaptor import Garak
+# from agent.garak.adaptor import Garak
 from agent.llamator.adaptor import Llamator
 from agent.vllm.openai_client import OpenAIClient
-# from agent.database.retriever import Retriever
+from agent.database.retriever import Retriever
 
 from agent.prompts import system_prompt, injection_prompt, simple_prompt
 
@@ -108,8 +108,8 @@ def RAG(cfg: DictConfig):
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     
-    adapterLlamator()
+    # adapterLlamator()
     # adapterGarak()
     # adaptorCustom()
 
-    # RAG()
+    RAG()

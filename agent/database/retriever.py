@@ -95,7 +95,6 @@ class Retriever(CustomDataset):
             self._client.create_collection(
                 collection_name=collection_name,
                 vectors_config={
-
                     "all-MiniLM-L6-v2":models.VectorParams(
                         size=len(dense_embeddings[model_name]),
                         distance=models.Distance.COSINE

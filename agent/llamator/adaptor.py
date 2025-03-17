@@ -21,9 +21,9 @@ class Llamator:
         attack_url = f"http://localhost:{portV1}/v1" if portV1 else None
         tested_url = f"http://localhost:{portV2}/v1" if portV1 else None
  
- 
-        attack_model=tested_model
-        tested_url=attack_url
+         
+        tested_url = attack_url
+        tested_model = attack_model
         
         self.attack_model = llamator.ClientOpenAI(
             api_key="lm-studio",
